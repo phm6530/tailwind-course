@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer components {
+  .menu-item {
+    @apply relative flex h-full items-center hover:cursor-pointer font-bold hover:text-zinc-200 hover:bg-white/10 p-4 transition-colors;
+  }
+
+  /* nav gradient */
+  .nav-gradient {
+    @apply bg-gradient-to-r from-rose-500 to-pink-500 hover:bg-amber-100;
+  }
+
+  .nav-item {
+    @apply text-center h-full cursor-pointer items-center p-4 font-bold text-pink-200 transition-colors ease-in-out hover:bg-white/10 hover:text-zinc-200;
+  }
+}

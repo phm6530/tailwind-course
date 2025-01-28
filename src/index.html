@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <script defer src="./assets//fontawesome//js/fontawesome.min.js"></script>
+    <script defer src="./assets//fontawesome/js/solid.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <header class="text-zinc-100">
+        <nav class="sticky top-0 nav-gradient flex pl-2 pr-2">
+          <!-- LOGO -->
+          <div class="flex items-center gap-2 hover:cursor-pointer p-4">
+            <img src="./assets/images/logo-inverted.png" width="50" />
+            <div class="text-2xl font-bold">
+              tw:<span class="text-sky-900"></span>mf
+            </div>
+          </div>
+
+          <!-- Mobile Nav -->
+          <div class="md:hidden my-auto ml-auto block cursor-pointer pr-4">
+            <button id="mobile-btn" class="group cursor-pointer peer">
+              <div
+                class="relative top-0 h-1 w-8 rounded-full bg-zinc-200 transition-all group-open:top-2 group-open:rotate-45"
+              ></div>
+              <div
+                class="mt-1 h-1 w-8 rounded-full bg-zinc-200 opacity-100 transition-all group-open:opacity-0"
+              ></div>
+              <div
+                class="relative top-0 mt-1 h-1 w-8 rounded-full bg-zinc-200 transition-all group-open:-top-2 group-open:-rotate-45"
+              ></div>
+            </button>
+
+            <div class="absolute w-full left-0 top-full nav-gradient">
+              <div class="group">
+                <div class="nav-item submenu">mobile Menu</div>
+                <div class="max-h-0 overflow-hidden transition-all">
+                  <div class="nav-item bg-amber-100">test</div>
+                  <div class="nav-item bg-amber-100">test</div>
+                  <div class="nav-item bg-amber-100">test</div>
+                </div>
+              </div>
+
+              <div class="group">
+                <div class="nav-item submenu">mobile Menu</div>
+                <div class="max-h-0 overflow-hidden transition-all">
+                  <div class="nav-item bg-amber-100">test</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MENU -->
+          <div class="md:flex hidden flex-1 items-center justify-end">
+            <div class="menu-item group">
+              <span> Home </span>
+
+              <div
+                class="absolute hidden group-hover:block top-full bg-pink-500 right-0 whitespace-nowrap rounded-b-md"
+              >
+                <div class="p-4 font-bold hover:bg-white/10">
+                  <span>menu - 1</span>
+                </div>
+
+                <div class="p-4 font-bold hover:bg-white/10">
+                  <span>menu menu menu - 2</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item group">
+              <span> Lineup </span>
+
+              <div
+                class="absolute hidden group-hover:block top-full bg-pink-500 right-0 whitespace-nowrap rounded-b-md"
+              >
+                <div class="p-4 font-bold hover:bg-white/10">
+                  <span>menu menu - 1</span>
+                </div>
+
+                <div class="p-4 font-bold hover:bg-white/10">
+                  <span>menu - 2</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <span> Tickets </span>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </main>
+  </body>
+  <script>
+    const mobileNav = document.getElementById("mobile-btn");
+    mobileNav.addEventListener("click", (e) => {
+      e.currentTarget.toggleAttribute("open");
+    });
+
+    // Submenu
+    const mobileSubmenu = document.querySelectorAll(".submenu");
+    mobileSubmenu.forEach((div) => {
+      //각 subMenu 높이 구하기
+      const curContents = div.nextElementSibling;
+      const contentsHeight = curContents.scrollHeight;
+
+      // 각 div 클릭했을때 이벤트
+      div.addEventListener("click", (curElement) => {
+        // 다른 div가 열려있다면 닫아버리기
+        mobileSubmenu.forEach((otherDiv) => {
+          const otherContents = otherDiv.nextElementSibling;
+          if (curElement.currentTarget !== otherDiv) {
+            otherContents.style.maxHeight = "0px";
+            otherDiv.removeAttribute("open");
+          }
+        });
+
+        //현재 콘텐츠에서 open이 있으면 높이 전달 아니면 0으로
+        if (curContents && !div.hasAttribute("open")) {
+          curContents.style.maxHeight = `${contentsHeight}px`;
+        } else {
+          curContents.style.maxHeight = `${0}px`;
+        }
+
+        div.toggleAttribute("open");
+      });
+    });
+  </script>
+</html>
